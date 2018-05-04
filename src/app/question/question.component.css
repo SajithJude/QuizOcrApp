@@ -1,4 +1,4 @@
-#question-form {
+#question-form, #results-section {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -8,14 +8,13 @@
     resize: none;
 }
 
-#submit-button-container {
+#button-container {
     position: relative;
     flex: 1;
     height: 100%;
 }
 
-#submit-button-container > .btn {
+#button-container > .btn {
     position: absolute;
     bottom: 0;
-    right: 0;
 }

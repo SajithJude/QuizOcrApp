@@ -21,12 +21,12 @@
       <input type="text" class="form-control" id="answer3-input" name="answer2-input"
         [(ngModel)]="answers[2]" placeholder="Answer #3">
     </div>
-    <div id="submit-button-container">
-      <button type="submit" class="btn btn-primary w-50" (click)="handleSubmit()"
+    <div id="button-container">
+      <button type="submit" class="btn btn-primary btn-block" (click)="handleSubmit()"
         >Submit</button>
     </div>
   </form>
-  <div *ngIf="submitted">
+  <div *ngIf="submitted" id="results-section">
     <p>{{question}}</p>
     <table class="table">
       <thead>
@@ -39,19 +39,29 @@
         <tr>
           <th scope="row">1</th>
           <td>{{answers[0]}}</td>
-          <td>{{likelihood[0]}}</td>
+          <td><i *ngIf="!isAnswerLoaded(0)" 
+            class="fa fa-spinner fa-spin"></i>
+            {{likelihood[0]}}</td>
         </tr>
         <tr>
           <th scope="row">2</th>
           <td>{{answers[1]}}</td>
-          <td>{{likelihood[1]}}</td>
+          <td><i *ngIf="!isAnswerLoaded(1)" 
+            class="fa fa-spinner fa-spin"></i>
+            {{likelihood[1]}}</td>
         </tr>
         <tr>
           <th scope="row">3</th>
           <td>{{answers[2]}}</td>
-          <td>{{likelihood[2]}}</td>
+          <td><i *ngIf="!isAnswerLoaded(2)" 
+            class="fa fa-spinner fa-spin"></i>
+            {{likelihood[2]}}</td>
         </tr>
       </tbody>
     </table>
+    <div id="button-container">
+        <button type="submit" class="btn btn-primary btn-block" (click)="returnToCamera()"
+          >Restart</button>
+      </div>
   </div>
 </div>
