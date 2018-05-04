@@ -1,0 +1,3 @@
+app (has header)
+   camera (with take photo button)
+   question analysis
