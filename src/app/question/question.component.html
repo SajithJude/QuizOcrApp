@@ -1,0 +1,57 @@
+<div class="page">
+  <form *ngIf="!submitted" id="question-form">
+    <div class="form-group">
+      <label for="question-input">Question</label>
+      <textarea class="form-control" id="question-input" name="question-input"
+        [(ngModel)]="question" aria-describedby="question-help" rows="4"
+        placeholder="Enter question"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="answer1-input">Answer 1</label>
+      <input type="text" class="form-control" id="answer1-input" name="answer1-input"
+        [(ngModel)]="answers[0]" placeholder="Answer #1">
+    </div>
+    <div class="form-group">
+      <label for="answer2-input">Answer 2</label>
+      <input type="text" class="form-control" id="answer2-input" name="answer2-input"
+        [(ngModel)]="answers[1]" placeholder="Answer #2">
+    </div>
+    <div class="form-group">
+      <label for="answer3-input">Answer 3</label>
+      <input type="text" class="form-control" id="answer3-input" name="answer2-input"
+        [(ngModel)]="answers[2]" placeholder="Answer #3">
+    </div>
+    <div id="submit-button-container">
+      <button type="submit" class="btn btn-primary w-50" (click)="handleSubmit()"
+        >Submit</button>
+    </div>
+  </form>
+  <div *ngIf="submitted">
+    <p>{{question}}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Answer</th>
+          <th scope="col">Likelihood</th>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>{{answers[0]}}</td>
+          <td>{{likelihood[0]}}</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>{{answers[1]}}</td>
+          <td>{{likelihood[1]}}</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>{{answers[2]}}</td>
+          <td>{{likelihood[2]}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

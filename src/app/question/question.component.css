@@ -1,0 +1,21 @@
+#question-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#question-input{
+    resize: none;
+}
+
+#submit-button-container {
+    position: relative;
+    flex: 1;
+    height: 100%;
+}
+
+#submit-button-container > .btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
