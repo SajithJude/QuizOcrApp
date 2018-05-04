@@ -1,3 +1,7 @@
-<p>
-  camera works!
-</p>
+<div id="camera-container">
+  <webcam id="camera" [width]="maxCameraWidth" [height]="maxCameraHeight"
+    *ngIf="showCamera" (imageCapture)="handleImage($event)"
+    [trigger]="triggerObservable"></webcam>
+  <button id="camera-button" class="btn btn-light" (click)="takePicture()"
+    *ngIf="showCamera"></button>
+</div>

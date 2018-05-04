@@ -1,0 +1,25 @@
+#camera-container {
+    background: black;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+#camera {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#camera-button {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    bottom: 4vh;
+    height: 8vh;
+    width: 8vh;
+    border-radius: 4vh;
+    opacity: 0.8;
+}
