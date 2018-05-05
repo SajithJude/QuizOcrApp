@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-question',
@@ -9,23 +9,31 @@ import { Router } from '@angular/router';
 })
 export class QuestionComponent implements OnInit {
 
-  submitted : boolean = false;
-
-  @Input() question : string;
-  @Input() answers : string[] = ["","",""];
+  ocrText : string;
+  question : string;
+  answers : string[] = ["","",""];
   googlePages : string[] = ["","",""];
-  bingPages : string[] = ["","",""];
   answerCounts : number[] = [0,0,0];
   likelihood : string[] = ["","",""];
 
-  constructor(private router: Router, private http: Http) { }
+  constructor(
+    private router: Router,
+    private http: Http,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.ocrText = this.route.snapshot.params.ocrText; 
+    var questionStartIdx = this.ocrText.search("up\\n") + 3;
+    var questionEndIdx = this.ocrText.search("\\?\\n") + 1;
+    var answersEndIdx = this.ocrText.search("\\nSwipe") + 1;
+    this.question = this.ocrText.substring(questionStartIdx, questionEndIdx);
+    this.answers = this.ocrText.substring(questionEndIdx + 1, answersEndIdx - 1).split(/\n/);
+    this.commenceGoogleSearch();
   }
 
-  handleSubmit() {
+  commenceGoogleSearch() {
     var self = this;
-    self.submitted = true;
     self.answers.forEach(function(answer, i) {
       self.http.get(
         "https://www.googleapis.com/customsearch/v1?q=" +
@@ -47,7 +55,12 @@ export class QuestionComponent implements OnInit {
               });
             }
           },
-          (err: Error) => self.handleError
+          (err: Error) => {
+            self.handleError(err);
+            self.likelihood.forEach(function(l){
+              l = "?";
+            });
+          }
         );
     });
   }
