@@ -57,7 +57,7 @@ export class CameraComponent implements OnInit {
     )
     .subscribe(
       (res: any) => {
-        ocrText = res.json().responses[0].textAnnotations[0].description;
+        ocrText = res.json().responses[0].fullTextAnnotation.text;
         self.router.navigate(['question', {ocrText: ocrText}]);
       },
       (err: Error) => {

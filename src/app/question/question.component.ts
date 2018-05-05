@@ -24,7 +24,7 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     this.ocrText = this.route.snapshot.params.ocrText; 
-    var questionStartIdx = this.ocrText.search("up\\n") + 3;
+    var questionStartIdx = this.ocrText.search("\\nH") + 4;
     var questionEndIdx = this.ocrText.search("\\?\\n") + 1;
     var answersEndIdx = this.ocrText.search("\\nSwipe") + 1;
     this.question = this.ocrText.substring(questionStartIdx, questionEndIdx);
