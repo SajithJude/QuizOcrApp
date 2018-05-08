@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { OcrTextService } from '../services/ocr-text.service';
 
 @Component({
   selector: 'app-question',
@@ -10,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class QuestionComponent implements OnInit {
 
   ocrText : string;
+  testOcrText : string;
   question : string;
   answers : string[] = ["","",""];
   googlePages : string[] = ["","",""];
@@ -19,11 +21,13 @@ export class QuestionComponent implements OnInit {
   constructor(
     private router: Router,
     private http: Http,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ocrTextService: OcrTextService
   ) { }
 
   ngOnInit() {
-    this.ocrText = this.route.snapshot.params.ocrText; 
+    //this.ocrText = this.route.snapshot.params.ocrText; 
+    this.ocrText = this.ocrTextService.ocrText;
     var questionStartIdx = this.ocrText.search("\\nH") + 4;
     var questionEndIdx = this.ocrText.search("\\?\\n") + 1;
     var answersEndIdx = this.ocrText.search("\\nSwipe") + 1;
