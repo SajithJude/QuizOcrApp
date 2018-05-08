@@ -37,15 +37,15 @@ export class QuestionComponent implements OnInit {
     self.answers.forEach(function(answer, i) {
       self.http.get(
         "https://www.googleapis.com/customsearch/v1?q=" +
-        self.question.replace(/[^\w\s]/gi, '').toLowerCase().split(" ").join("+") +
-        self.answers[i].replace(/[^\w\s]/gi, '').toLowerCase().split(" ").join("+") +
+        self.question.replace(/[^\w\s]/gi, '').toLowerCase().replace(/(\r\n\t|\n|\r\t)/gm," ").split(" ").join("+") + " " +
+        self.answers[i].replace(/[^\w\s]/gi, '').toLowerCase().replace(/(\r\n\t|\n|\r\t)/gm," ").split(" ").join("+") +
         "&num=10&c2coff=1&filter=0&lr=lang_en&" +
         "key=AIzaSyAnbHJbJR8zdaDhG9pigGjtU3SKLHjFHqU&" +
         "cx=009790495881824375879:so76g6onpgu"
         )
         .subscribe(
           (res: any) => {
-            self.googlePages[i] = JSON.stringify(res).toLowerCase();
+            self.googlePages[i] = res.json().items.map(i => i.snippet).join(" ").toLowerCase();
             self.answerCounts[i] = self.countOcurrences(self.googlePages[i],self.answers[i]);
             if(i == self.answers.length - 1)
             {
@@ -82,7 +82,7 @@ export class QuestionComponent implements OnInit {
   }
 
   private countOcurrences(str, value) {
-    var regExp = new RegExp(value, "gi");
+    var regExp = new RegExp("\\b" + value +"\\b", "gi");
     return (str.match(regExp) || []).length;
   }
 
