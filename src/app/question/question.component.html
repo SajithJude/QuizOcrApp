@@ -32,29 +32,31 @@
         </tr>
       </tbody>
     </table>
-    <div class="row">
+    <div class="row mb-4">
+      <h3 class="col-4">{{answers[0]}}</h3>
+      <h3 class="col-4">{{answers[1]}}</h3>
+      <h3 class="col-4">{{answers[2]}}</h3>
+    </div>
+    <div id="snippets-container" class="row">
       <div id="answer1-snippets" class="col-4">
-        <h3>{{answers[0]}}</h3>
         <i *ngIf="!isAnswerLoaded(0)" class="fa fa-spinner fa-spin"></i>
         <div class="snippet" [innerHtml]="snippets[0]"><i *ngIf="!isAnswerLoaded(0)" 
           class="fa fa-spinner fa-spin"></i></div>
       </div>
       <div id="answer2-snippets" class="col-4">
-        <h3>{{answers[1]}}</h3>
         <i *ngIf="!isAnswerLoaded(1)" class="fa fa-spinner fa-spin"></i>
         <div class="snippet" [innerHtml]="snippets[1]"><i *ngIf="!isAnswerLoaded(1)" 
           class="fa fa-spinner fa-spin"></i></div>
       </div>
       <div id="answer3-snippets" class="col-4">
-        <h3>{{answers[2]}}</h3>
         <i *ngIf="!isAnswerLoaded(2)" class="fa fa-spinner fa-spin"></i>
         <div class="snippet" [innerHtml]="snippets[2]"><i *ngIf="!isAnswerLoaded(2)" 
           class="fa fa-spinner fa-spin"></i></div>
       </div>
     </div>
     <div id="button-container">
-        <button type="submit" class="btn btn-primary btn-block" (click)="returnToCamera()"
-          >Restart</button>
-      </div>
+      <button type="submit" class="btn btn-primary btn-block" (click)="returnToCamera()"
+        >Restart</button>
+    </div>
   </div>
 </div>
