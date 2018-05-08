@@ -18,3 +18,13 @@
     position: absolute;
     bottom: 0;
 }
+
+.snippet {
+    font-size: 14px;
+    white-space: pre-wrap;
+}
+
+.snippet .match {
+    font-size: 16px;
+    font-weight: bolder;
+}
