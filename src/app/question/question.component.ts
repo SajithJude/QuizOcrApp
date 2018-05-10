@@ -74,8 +74,9 @@ export class QuestionComponent implements OnInit {
 
   private searchForAnswer(i : number) {
     var self = this;
-    var questionQuery = self.question.replace(/[^\w\s]/gi, '').toLowerCase().split(" ").join("+");
-    var answerQuery = self.answers[i].replace(/[^\w\s]/gi, '').toLowerCase().split(" ").join("+");
+    var questionQuery = self.question.toLowerCase().split(" ").join("+");
+    var answerQuery = self.answers[i].toLowerCase().split(" ").join("+");
+    if(!self.question) return;
     return self.http.get(
       "https://www.googleapis.com/customsearch/v1?q=" + questionQuery + " " +
       answerQuery + "&hq=" + answerQuery + "&exactterms=" + answerQuery + 
@@ -94,8 +95,8 @@ export class QuestionComponent implements OnInit {
         }
         else
         {
-          self.snippets[i] = "";
-          self.answerCounts[i] = -1;
+          self.snippets[i] = "No Results found";
+          self.answerCounts[i] = 0;
         }
         return res.json();
       },
