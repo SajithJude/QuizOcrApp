@@ -5,7 +5,6 @@ export class OcrTextService {
 
   ocrText: string;
 
-
   constructor() { }
 
 }

@@ -44,7 +44,6 @@ export class CameraComponent implements OnInit {
     var ocrText = "";
     self.http.post(
       "https://vision.googleapis.com/v1/images:annotate?" +
-      //"key=AIzaSyAnbHJbJR8zdaDhG9pigGjtU3SKLHjFHqU&",
       this.apiKey,
       {
         "requests": [

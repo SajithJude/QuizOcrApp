@@ -15,7 +15,6 @@ import 'rxjs/add/observable/forkJoin'
 export class QuestionComponent implements OnInit {
 
   ocrText : string;
-  testOcrText : string;
   question : string;
   answers : string[] = ["","",""];
   snippets : string[] = ["","",""];
@@ -30,8 +29,7 @@ export class QuestionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.ocrText = this.ocrTextService.ocrText.replace(/(\r\n\t|\n|\r\t)/gm,"_"); 
-    // this.ocrText = this.route.snapshot.params.ocrText.replace(/(\r\n\t|\n|\r\t)/gm,"_");
+    this.ocrText = this.ocrTextService.ocrText.replace(/(\r\n\t|\n|\r\t)/gm,"_");
     var questionStartIdx = 0;//this.ocrText.search("_H") + 4;
     var questionEndIdx = this.ocrText.search("\\?_") + 1;
     var answersEndIdx = this.ocrText.search("_Swipe") + 1;
