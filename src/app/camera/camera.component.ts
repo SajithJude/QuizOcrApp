@@ -47,7 +47,7 @@ export class CameraComponent implements OnInit {
     var ocrText = "";
     self.http.post(
       "https://vision.googleapis.com/v1/images:annotate?" +
-      this.apiKey,
+      "key=" + this.apiKey,
       {
         "requests": [
           {
@@ -66,7 +66,7 @@ export class CameraComponent implements OnInit {
     .subscribe(
       (res: any) => {
         ocrText = res.json().responses[0].fullTextAnnotation.text;
-        this.ocrTextService.ocrText = ocrText;
+        self.ocrTextService.ocrText = ocrText;
         self.router.navigate(['question']);
       },
       (err: Error) => {
