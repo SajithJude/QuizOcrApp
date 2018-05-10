@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { OcrTextService } from '../services/ocr-text.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/observable/forkJoin'
@@ -14,6 +15,7 @@ import 'rxjs/add/observable/forkJoin'
 export class QuestionComponent implements OnInit {
 
   ocrText : string;
+  testOcrText : string;
   question : string;
   answers : string[] = ["","",""];
   snippets : string[] = ["","",""];
@@ -23,11 +25,13 @@ export class QuestionComponent implements OnInit {
   constructor(
     private router: Router,
     private http: Http,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ocrTextService: OcrTextService
   ) { }
 
   ngOnInit() {
-    this.ocrText = this.route.snapshot.params.ocrText.replace(/(\r\n\t|\n|\r\t)/gm,"_"); 
+    this.ocrText = this.ocrTextService.ocrText.replace(/(\r\n\t|\n|\r\t)/gm,"_"); 
+    // this.ocrText = this.route.snapshot.params.ocrText.replace(/(\r\n\t|\n|\r\t)/gm,"_");
     var questionStartIdx = 0;//this.ocrText.search("_H") + 4;
     var questionEndIdx = this.ocrText.search("\\?_") + 1;
     var answersEndIdx = this.ocrText.search("_Swipe") + 1;

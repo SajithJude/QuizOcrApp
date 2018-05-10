@@ -4,6 +4,8 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
+import { OcrTextService } from '../services/ocr-text.service';
+import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'app-camera',
@@ -12,11 +14,14 @@ import { Http, Response } from '@angular/http';
 })
 export class CameraComponent implements OnInit {
 
-  constructor(private router : Router, private http : Http) { }
+  constructor(private router : Router, private http : Http, private ocrTextService: OcrTextService, private config: AppConfig) {
+    this.apiKey = config.getConfig('googleApiKey');
+   }
 
   maxCameraWidth : number;
   maxCameraHeight : number;
   cameraImage : WebcamImage;
+  apiKey: string;
 
   ngOnInit() {
     this.maxCameraHeight = window.innerHeight;
@@ -39,7 +44,8 @@ export class CameraComponent implements OnInit {
     var ocrText = "";
     self.http.post(
       "https://vision.googleapis.com/v1/images:annotate?" +
-      "key=AIzaSyAnbHJbJR8zdaDhG9pigGjtU3SKLHjFHqU&",
+      //"key=AIzaSyAnbHJbJR8zdaDhG9pigGjtU3SKLHjFHqU&",
+      this.apiKey,
       {
         "requests": [
           {
@@ -58,7 +64,9 @@ export class CameraComponent implements OnInit {
     .subscribe(
       (res: any) => {
         ocrText = res.json().responses[0].fullTextAnnotation.text;
-        self.router.navigate(['question', {ocrText: ocrText}]);
+        this.ocrTextService.ocrText = ocrText;
+        //self.router.navigate(['question', {ocrText: ocrText}]);
+        self.router.navigate(['question']);
       },
       (err: Error) => {
         self.handleError(err);
