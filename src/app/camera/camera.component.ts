@@ -14,14 +14,17 @@ import { AppConfig } from '../app.config';
 })
 export class CameraComponent implements OnInit {
 
-  constructor(private router : Router, private http : Http, private ocrTextService: OcrTextService, private config: AppConfig) {
+  constructor(private router : Router, private http : Http,
+              private ocrTextService: OcrTextService, private config: AppConfig) {
     this.apiKey = config.getConfig('googleApiKey');
+    this.cxKey = config.getConfig('googleCxKey');
    }
 
   maxCameraWidth : number;
   maxCameraHeight : number;
   cameraImage : WebcamImage;
   apiKey: string;
+  cxKey: string;
 
   ngOnInit() {
     this.maxCameraHeight = window.innerHeight;
@@ -64,7 +67,6 @@ export class CameraComponent implements OnInit {
       (res: any) => {
         ocrText = res.json().responses[0].fullTextAnnotation.text;
         this.ocrTextService.ocrText = ocrText;
-        //self.router.navigate(['question', {ocrText: ocrText}]);
         self.router.navigate(['question']);
       },
       (err: Error) => {

@@ -5,6 +5,7 @@ import { OcrTextService } from '../services/ocr-text.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/observable/forkJoin'
+import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'app-question',
@@ -20,13 +21,16 @@ export class QuestionComponent implements OnInit {
   snippets : string[] = ["","",""];
   answerCounts : number[] = [0,0,0];
   likelihood : string[] = ["","",""];
+  apiKey: string;
+  cxKey: string;
 
   constructor(
-    private router: Router,
-    private http: Http,
-    private route: ActivatedRoute,
-    private ocrTextService: OcrTextService
-  ) { }
+    private router : Router, private http : Http,
+    private ocrTextService: OcrTextService, private config: AppConfig
+  ) {
+    this.apiKey = config.getConfig('googleApiKey');
+    this.cxKey = config.getConfig('googleCxKey');
+  }
 
   ngOnInit() {
     this.ocrText = this.ocrTextService.ocrText.replace(/(\r\n\t|\n|\r\t)/gm,"_");
@@ -76,8 +80,8 @@ export class QuestionComponent implements OnInit {
       "https://www.googleapis.com/customsearch/v1?q=" + questionQuery + " " +
       answerQuery + "&hq=" + answerQuery + "&exactterms=" + answerQuery + 
       "&num=10&c2coff=1&lr=lang_en&" +
-      "&key=AIzaSyAnbHJbJR8zdaDhG9pigGjtU3SKLHjFHqU" +
-      "&cx=009790495881824375879:so76g6onpgu"
+      "&key=" + this.apiKey +
+      "&cx=" + this.cxKey
       )
     .map(
       (res: any) => {
