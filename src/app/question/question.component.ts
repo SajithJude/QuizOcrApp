@@ -19,6 +19,8 @@ export class QuestionComponent implements OnInit {
   question : string;
   answers : string[] = ["","",""];
   snippets : string[] = ["","",""];
+  images : string[] = ["","",""];
+  dedupedImages : string[];
   answerCounts : number[] = [0,0,0];
   likelihood : string[] = ["","",""];
   apiKey: string;
@@ -53,6 +55,9 @@ export class QuestionComponent implements OnInit {
     )
     .subscribe(
       (res: any) => {
+        self.dedupedImages = [].concat.apply([], self.images).filter(function(elem, index, self) {
+          return index == self.indexOf(elem);
+        });;
         self.answerCounts.forEach(function(answer, j) {
           if(answer != -1)
           {
@@ -88,7 +93,20 @@ export class QuestionComponent implements OnInit {
       (res: any) => {
         if (res.json().items)
         {
-          self.snippets[i] = res.json().items.map(i => i.snippet).join("\n\n").toLowerCase();
+          self.snippets[i] = res.json().items.map(i => i.snippet)
+            .sort(function(a, b){    // sort snippets for highest count of answer
+              var count1 = self.countOcurrences(a, self.answers[i]);
+              var count2 = self.countOcurrences(b, self.answers[i]);
+              if (count1 < count2) return 1;
+              if (count1 > count2) return -1;
+              if (count1 == count2) return 0;
+            })
+            .join("\n\n").toLowerCase();
+          self.images[i] = res.json().items
+            .filter(i => i.pagemap != undefined)
+            .map(i => i.pagemap.cse_thumbnail)
+            .filter(c => c != undefined)
+            .map(c => c[0].src);
           var regExp = new RegExp("\\b" + self.answers[i] +"\\b", "gi");
           self.snippets[i] = self.snippets[i].replace(regExp, `<span class="answer-match">$&</span>`);
           self.answerCounts[i] = self.countOcurrences(self.snippets[i],self.answers[i]);
@@ -96,6 +114,7 @@ export class QuestionComponent implements OnInit {
         else
         {
           self.snippets[i] = "No Results found";
+          self.images[i] = "";
           self.answerCounts[i] = 0;
         }
         return res.json();

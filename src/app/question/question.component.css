@@ -1,7 +1,6 @@
-#question-form, #results-section {
+#results-section {
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 #question-input{
@@ -11,13 +10,15 @@
 #button-container {
     position: relative;
     flex: 1;
-    height: 100%;
-    margin-top: 16px;
 }
 
 #snippets-container {
-    height: 100%;
     overflow-y: scroll;
+    height: calc(100% - 96px);
+}
+
+#answer-headers-container {
+    height: 64px;
 }
 
 .snippet {
@@ -30,4 +31,23 @@
     font-size: 16px;
     font-weight: bolder;
     color: red;
+}
+
+#images-container {
+    overflow-y: scroll;
+}
+
+.img-container {
+    line-height: 0;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 0px;
+    -moz-column-count: 3;
+    -moz-column-gap:0px;
+    column-count: 3;
+    column-gap: 0px;  
+}
+
+img {
+    width: 100% !important;
+    height: auto !important;
 }
