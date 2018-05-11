@@ -5,11 +5,11 @@ import { CameraComponent } from './camera/camera.component';
 import { ScreenshotComponent } from './screenshot/screenshot.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'screenshot' },
+  { path: '', pathMatch: 'full', redirectTo: 'camera' },
   { path: 'screenshot', component: ScreenshotComponent },
   { path: 'camera', component: CameraComponent },
   { path: 'question', component: QuestionComponent }, 
-  { path: '**', pathMatch: 'full', redirectTo: 'screenshot' },
+  { path: '**', pathMatch: 'full', redirectTo: 'camera' },
 ];
 
 @NgModule({
