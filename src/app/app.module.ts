@@ -13,6 +13,7 @@ import { CameraComponent } from './camera/camera.component';
 import { QuestionComponent } from './question/question.component';
 import { OcrTextService } from './services/ocr-text.service';
 import { AppConfig } from './app.config';
+import { ScreenshotComponent } from './screenshot/screenshot.component';
 
 function initConfig(config: AppConfig) {
   return () => config.load();
@@ -22,7 +23,8 @@ function initConfig(config: AppConfig) {
   declarations: [
     AppComponent,
     CameraComponent,
-    QuestionComponent
+    QuestionComponent,
+    ScreenshotComponent
   ],
   imports: [
     BrowserModule,
