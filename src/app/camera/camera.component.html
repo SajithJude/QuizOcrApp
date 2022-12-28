@@ -5,5 +5,13 @@
     <img *ngIf="!showCamera" [src]="cameraImage.imageAsDataUrl"/>
     <i *ngIf="!showCamera" class="fa fa-spinner fa-spin"></i>
   <button id="camera-button" class="btn btn-light" (click)="takePicture()"
-    *ngIf="showCamera"></button>
+    *ngIf="showCamera">
+    <i class="fa fa-camera fa camera"></i>  Photo</button>
+
+    <button id="cancel-button" class="btn btn-light" (click)="returnToCamera()"
+    *ngIf="!showCamera">
+    <i class="fa fa-close fa close"></i> Clear</button>
+
+    <button id="cance-button" class="btn btn-light" *ngIf="showCamera"
+    > Clear</button>
 </div>

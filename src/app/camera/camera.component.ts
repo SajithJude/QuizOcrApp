@@ -27,7 +27,7 @@ export class CameraComponent implements OnInit {
   cxKey: string;
 
   ngOnInit() {
-    this.maxCameraHeight = window.innerHeight;
+    this.maxCameraHeight = window.innerHeight/2;
     this.maxCameraWidth = window.innerWidth;
   }
 
@@ -39,12 +39,18 @@ export class CameraComponent implements OnInit {
   takePicture() {
     this.trigger.next();
   }
-
+  returnToCamera() {
+    var self = this;
+    self.showCamera = true;
+    this.router.navigate(['camera']);
+  }
   public handleImage(cameraImage: WebcamImage): void {
     var self = this;
     self.showCamera = false;
     self.cameraImage = cameraImage;
     var ocrText = "";
+    // var ocrTet = "";
+
     self.http.post(
       "https://vision.googleapis.com/v1/images:annotate?" +
       "key=" + this.apiKey,
@@ -56,7 +62,8 @@ export class CameraComponent implements OnInit {
             },
             "features": [
               {
-                "type": "TEXT_DETECTION"
+                'type':'TEXT_DETECTION',
+                'maxResults':5
               }
             ]
           }
@@ -65,9 +72,13 @@ export class CameraComponent implements OnInit {
     )
     .subscribe(
       (res: any) => {
+        // ocrText = res.json().responses[0].textAnnotations.description; 
         ocrText = res.json().responses[0].fullTextAnnotation.text;
+        console.log(ocrText)
         self.ocrTextService.ocrText = ocrText;
-        self.router.navigate(['question']);
+        // self.router.navigate(['question']);
+        self.router.navigate(['camera']);
+
       },
       (err: Error) => {
         self.handleError(err);
