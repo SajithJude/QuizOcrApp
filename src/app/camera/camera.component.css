@@ -10,7 +10,7 @@
 
 #camera {
     position: absolute;
-    top: 120px;
+    top: 135px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -80,7 +80,7 @@ img {
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
-    top: 30%;
+    top: 25%;
     max-width: 100%;
     max-height: 50%;
     height: inherit !important;

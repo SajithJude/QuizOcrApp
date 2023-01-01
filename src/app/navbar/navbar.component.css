@@ -1,0 +1,54 @@
+
+.mobile-container {
+    max-width: 480px;
+    margin: auto;
+    background-color:#21325F;
+    ;
+    height: 500px;
+    color: white;
+    border-radius: 10px;
+  }
+  
+  .topnav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    /* height: 100%; */
+    z-index: 9999;
+    overflow: hidden;
+    background:#21325F;
+
+    /* position: relative; */
+  }
+  
+  .topnav #myLinks {
+    display: none;
+  }
+  
+  .topnav a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+  }
+  
+  .topnav a.icon {
+    background: black;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .active {
+    background-color: #21325F;
+    color: white;
+    right:0;
+  }

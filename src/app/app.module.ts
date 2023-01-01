@@ -1,10 +1,10 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-// import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
+// import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatSidenavModule } from '@angular/material/sidenav';
+// import { MatButtonModule } from '@angular/material/button';
+// // import { MatIconModule } from '@angular/material/icon';
+// import { MatDividerModule } from '@angular/material/divider';
 
 
 
@@ -22,6 +22,7 @@ import { QuestionComponent } from './question/question.component';
 import { OcrTextService } from './services/ocr-text.service';
 import { AppConfig } from './app.config';
 import { ScreenshotComponent } from './screenshot/screenshot.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 function initConfig(config: AppConfig) {
   return () => config.load();
@@ -32,13 +33,14 @@ function initConfig(config: AppConfig) {
     AppComponent,
     CameraComponent,
     QuestionComponent,
-    ScreenshotComponent
+    ScreenshotComponent,
+    NavbarComponent
   ],
   imports: [
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule, 
-    MatDividerModule,
+    // MatToolbarModule,
+    // MatSidenavModule,
+    // MatButtonModule, 
+    // MatDividerModule,
 
     BrowserModule,
     AppRoutingModule,
