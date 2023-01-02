@@ -23,6 +23,10 @@ import { OcrTextService } from './services/ocr-text.service';
 import { AppConfig } from './app.config';
 import { ScreenshotComponent } from './screenshot/screenshot.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FacedetectionComponent } from './facedetection/facedetection.component';
+import { EmotionComponent } from './emotion/emotion.component';
+import { ProductComponent } from './product/product.component';
+import { MapComponent } from './map/map.component';
 
 function initConfig(config: AppConfig) {
   return () => config.load();
@@ -34,7 +38,11 @@ function initConfig(config: AppConfig) {
     CameraComponent,
     QuestionComponent,
     ScreenshotComponent,
-    NavbarComponent
+    NavbarComponent,
+    FacedetectionComponent,
+    EmotionComponent,
+    ProductComponent,
+    MapComponent
   ],
   imports: [
     // MatToolbarModule,

@@ -1,16 +1,18 @@
 <div class="topnav">
-  <a href="#home" class="active" style="padding-left:80px">OCR</a>
+  <!-- <img src="src/assets/Instancy HD Logo-800 (White-color) 1.png" > -->
+  <a id="home" href="#home" class="active" style="padding-left:80px">Optical Character Recognition</a>
   <div id="myLinks">
-    <a href="#news">Image Tracking</a>
-    <a href="#contact">Ground Tracking</a>
-    <a href="#facerec">Product Information</a>
-    <a href="#facerec">Face Recognition</a>
-    <a href="#facerec">Face Emotion Detection</a>
-    <a href="#facerec">Pharmaceutical Drug info</a>
-    <a href="#facerec">Find it on the Map</a>
-    <a href="#facerec">Location Based Content</a>
-    <a href="#facerec">Try Body Poses</a>
-    <a href="#facerec">Language Translation</a>
+
+    <a (click)="someActin()">Image Tracking</a>
+    <a (click)="ground()">Ground Tracking</a>
+    <a  (click)="product()" >Product Information</a>
+    <a  (click)="someAction()" >Face Recognition</a>
+    <a  (click)="emotion()" >Face Emotion Detection</a>
+    <a  (click)="pharma()" >Pharmaceutical Drug info</a>
+    <a  (click)="map()" >Find it on the Map</a>
+    <a  (click)="location()" >Location Based Content</a>
+    <a  (click)="poses()" >Try Body Poses</a>
+    <a  (click)="translate()" >Language Translation</a>
   </div>
   <a href="javascript:void(0);" class="icon" (click)="onClick()">
     <i class="fa fa-bars"></i>

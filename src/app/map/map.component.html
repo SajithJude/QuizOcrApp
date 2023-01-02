@@ -1,7 +1,7 @@
 <div id="camera-container">
   <p id="text">
-    Point the camera to printed text or a computer screen
-  </p>
+    Point the camera to the image of a famous building and view the location on the map
+    </p>
 
   <webcam id="camera" [width]="maxCameraWidth" [height]="maxCameraHeight"
     *ngIf="showCamera" (imageCapture)="handleImage($event)"
@@ -21,7 +21,9 @@
 </div>
 
 <div id="result-container">
-<p id="label">Text Recognized</p>
+<!-- <p id="label">Name</p> -->
 <p id="result"></p>
+<p id="link"></p>
+
 
 </div>
